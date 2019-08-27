@@ -1,39 +1,38 @@
 var jsonURL = 'https://darbeloff.github.io/lab-utils/employees.json';
 var jqhxr = $.getJSON(jsonURL, function(data) {
-	var research_staff = data.research_staff;
 	var html = generateHeader('Research Staff') + startTable();
-	for (let e=0; e<research_staff.length; e++) {
-		html += generateRow(e, research_staff[e], false);
+	for (let e=0; e<data.research_staff.length; e++) {
+		html += generateRow(e, data.research_staff[e], false);
 	}
 	html += endTable();
 	document.getElementById('research-staff').innerHTML = html;
 
 	html = generateHeader('Graduate Student-Workers') + startTable();
 	gswTitles = ['M.S. Student','Ph.D. Student','Ph.D. Candidate'];
-	grad_student_workers.sort((a,b) => gswTitles.indexOf(b.title)-gswTitles.indexOf(a.title));
-	for (let e=0; e<grad_student_workers.length; e++) {
-		html += generateRow(e, grad_student_workers[e], false);
+	data.grad_student_workers.sort((a,b) => gswTitles.indexOf(b.title)-gswTitles.indexOf(a.title));
+	for (let e=0; e<data.grad_student_workers.length; e++) {
+		html += generateRow(e, data.grad_student_workers[e], false);
 	}
 	html += endTable();
 	document.getElementById('graduate-student-workers').innerHTML = html;
 
 	html = generateHeader('Visiting Engineers') + startTable();
-	for (let e=0; e<visiting_engineers.length; e++) {
-		html += generateRow(e, visiting_engineers[e], false);
+	for (let e=0; e<data.visiting_engineers.length; e++) {
+		html += generateRow(e, data.visiting_engineers[e], false);
 	}
 	html += endTable();
 	document.getElementById('visiting-engineers').innerHTML = html;
 
 	html = generateHeader('Undergraduate Researchers') + startTable();
-	for (let e=0; e<urops.length; e++) {
-		html += generateRow(e, urops[e], true);
+	for (let e=0; e<data.urops.length; e++) {
+		html += generateRow(e, data.urops[e], true);
 	}
 	html += endTable();
 	document.getElementById('undergraduate-researchers').innerHTML = html;
 
 	html = generateHeader('Lab Alumni') + startTable();
-	for (let e=0; e<alumni.length; e++) {
-		html += generateRow(e, alumni[e], true);
+	for (let e=0; e<data.alumni.length; e++) {
+		html += generateRow(e, data.alumni[e], true);
 	}
 	html += endTable();
 	document.getElementById('lab-alumni').innerHTML = html;
