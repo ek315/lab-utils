@@ -1,39 +1,45 @@
-var html = generateHeader('Research Staff') + startTable();
-for (let e=0; e<research_staff.length; e++) {
-	html += generateRow(e, research_staff[e], false);
-}
-html += endTable();
-document.getElementById('research-staff').innerHTML = html;
+var jsonURL = 'https://darbeloff.github.io/lab-utils/employees.json';
+var jqhxr = $.getJSON(jsonURL, function(data) {
+	var html = generateHeader('Research Staff') + startTable();
+	for (let e=0; e<research_staff.length; e++) {
+		html += generateRow(e, research_staff[e], false);
+	}
+	html += endTable();
+	document.getElementById('research-staff').innerHTML = html;
 
-html = generateHeader('Graduate Student-Workers') + startTable();
-gswTitles = ['M.S. Student','Ph.D. Student','Ph.D. Candidate'];
-grad_student_workers.sort((a,b) => gswTitles.indexOf(b.title)-gswTitles.indexOf(a.title));
-for (let e=0; e<grad_student_workers.length; e++) {
-	html += generateRow(e, grad_student_workers[e], false);
-}
-html += endTable();
-document.getElementById('graduate-student-workers').innerHTML = html;
+	html = generateHeader('Graduate Student-Workers') + startTable();
+	gswTitles = ['M.S. Student','Ph.D. Student','Ph.D. Candidate'];
+	grad_student_workers.sort((a,b) => gswTitles.indexOf(b.title)-gswTitles.indexOf(a.title));
+	for (let e=0; e<grad_student_workers.length; e++) {
+		html += generateRow(e, grad_student_workers[e], false);
+	}
+	html += endTable();
+	document.getElementById('graduate-student-workers').innerHTML = html;
 
-html = generateHeader('Visiting Engineers') + startTable();
-for (let e=0; e<visiting_engineers.length; e++) {
-	html += generateRow(e, visiting_engineers[e], false);
-}
-html += endTable();
-document.getElementById('visiting-engineers').innerHTML = html;
+	html = generateHeader('Visiting Engineers') + startTable();
+	for (let e=0; e<visiting_engineers.length; e++) {
+		html += generateRow(e, visiting_engineers[e], false);
+	}
+	html += endTable();
+	document.getElementById('visiting-engineers').innerHTML = html;
 
-html = generateHeader('Undergraduate Researchers') + startTable();
-for (let e=0; e<urops.length; e++) {
-	html += generateRow(e, urops[e], true);
-}
-html += endTable();
-document.getElementById('undergraduate-researchers').innerHTML = html;
+	html = generateHeader('Undergraduate Researchers') + startTable();
+	for (let e=0; e<urops.length; e++) {
+		html += generateRow(e, urops[e], true);
+	}
+	html += endTable();
+	document.getElementById('undergraduate-researchers').innerHTML = html;
 
-html = generateHeader('Lab Alumni') + startTable();
-for (let e=0; e<alumni.length; e++) {
-	html += generateRow(e, alumni[e], true);
-}
-html += endTable();
-document.getElementById('lab-alumni').innerHTML = html;
+	html = generateHeader('Lab Alumni') + startTable();
+	for (let e=0; e<alumni.length; e++) {
+		html += generateRow(e, alumni[e], true);
+	}
+	html += endTable();
+	document.getElementById('lab-alumni').innerHTML = html;
+});
+jqhxr.fail(function() {
+	throw new Error('JSON file not formatted correctly. Go to ' + jsonURL + ' to learn more.')
+});
 
 function generateHeader(title) {
 	return '<h1 style="text-align: center;">' + title + '</h1><hr />'
