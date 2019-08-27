@@ -1,5 +1,6 @@
 var jsonURL = 'https://darbeloff.github.io/lab-utils/employees.json';
 var jqhxr = $.getJSON(jsonURL, function(data) {
+	var research_staff = data.research_staff;
 	var html = generateHeader('Research Staff') + startTable();
 	for (let e=0; e<research_staff.length; e++) {
 		html += generateRow(e, research_staff[e], false);
